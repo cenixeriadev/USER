@@ -1,0 +1,41 @@
+﻿@page 
+@model WebApplication1.Models.IndexModel
+@{
+    //ViewData["Title"] = "Clientes";
+    IndexModel obj = new IndexModel();
+    
+}
+<br>
+<h2>Lista de Clientes</h2>
+<a class="btn btn-primary btn-sm" href="/Clientes/Create">New Client</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Telefono</th>
+            <th>Direccion</th>
+            <th>Fecha de registro</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in  obj.OnGet())
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.nombre</td>
+                <td>@item.email</td>
+                <td>@item.telefono</td>
+                <td>@item.direccion</td>
+                <td>@item.fecha_registro</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="/Clientes/Edit/Id=@item.Id">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="/Clientes/Delete/Id=@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+    
+</table>
