@@ -1,92 +1,29 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Services;
 
 namespace WebApplication1.Controllers
 {
     public class ClientesController : Controller
     {
-        // GET: HomeController1
-        private readonly ILogger<ClientesController> _logger;
-        public ClientesController(ILogger<ClientesController> logger)
+       
+        private readonly IClienteService _clienteService;
+
+        public ClientesController(IClienteService clienteService)
         {
-            this._logger = logger;
+            _clienteService = clienteService;
         }
+
         public IActionResult IndexC()
         {
-            return View();
-        }
-        public ActionResult Index()
-        {
-            return View();
+            var clientes = _clienteService.ObtenerClientes();
+            return View(clientes);
         }
 
-        // GET: HomeController1/Details/5
-        public ActionResult Details(int id)
+        public IActionResult Delete(int id)
         {
-            return View();
-        }
-
-        // GET: HomeController1/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: HomeController1/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: HomeController1/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: HomeController1/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: HomeController1/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: HomeController1/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _clienteService.EliminarCliente(id);
+            return RedirectToAction(nameof(IndexC));
         }
     }
 }

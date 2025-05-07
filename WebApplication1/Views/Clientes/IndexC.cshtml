@@ -1,7 +1,6 @@
-﻿@model WebApplication1.Models.IndexModel  
+﻿@model List<WebApplication1.Models.ClienteInfo>
 @{
-    //ViewData["Title"] = "Clientes";
-    IndexModel obj = new IndexModel();
+    ViewData["Title"] = "Lista Clientes";
     // I have to delete the @page notation above of @model cause give me an unexpected token in riderJetBrains
 }
 <br>
@@ -19,18 +18,20 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(var item in  obj.OnGet())
+        @foreach(var item in  Model)
         {
             <tr>
                 <td>@item.Id</td>
-                <td>@item.nombre</td>
-                <td>@item.email</td>
-                <td>@item.telefono</td>
-                <td>@item.direccion</td>
-                <td>@item.fecha_registro</td>
+                <td>@item.Nombre</td>
+                <td>@item.Email</td>
+                <td>@item.Telefono</td>
+                <td>@item.Direccion</td>
+                <td>@item.FechaRegistro</td>
                 <td>
                     <a class="btn btn-primary btn-sm" href="/Clientes/Edit/Id=@item.Id">Edit</a>
-                    <a class="btn btn-danger btn-sm" href="/Clientes/Delete/Id=@item.Id">Delete</a>
+                    <a class="btn btn-danger btn-sm" href="/Clientes/Delete/@item.Id">Eliminar</a>
+
+
                 </td>
             </tr>
         }
